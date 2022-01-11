@@ -2,15 +2,13 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-const INITIAL_VALUE = 0;
-
 class Header extends Component {
   render() {
     const { email, totalValue } = this.props;
     return (
       <div className="header">
         <p data-testid="email-field">{ email }</p>
-        <p data-testid="total-field">{ totalValue || INITIAL_VALUE }</p>
+        <p data-testid="total-field">{ totalValue }</p>
         <p data-testid="header-currency-field">BRL</p>
       </div>
     );
