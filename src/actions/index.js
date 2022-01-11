@@ -3,9 +3,9 @@ export const FETCH_API = 'FETCH_API';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const ADD_VALUE = 'ADD_VALUE';
 
-export const setUser = (payload) => ({
+export const setUser = (email) => ({
   type: SAVE_USER,
-  payload,
+  email,
 });
 
 const fetchApi = () => ({
