@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addValue, getData } from '../actions';
 
-const INITIAL_LOCAL_STATE = {
+const INITIAL_STATE = {
   value: '',
   description: '',
   currency: 'USD',
@@ -21,7 +21,7 @@ class Form extends Component {
 
     this.state = {
       id: 0,
-      ...INITIAL_LOCAL_STATE,
+      ...INITIAL_STATE,
       exchangeRates: {},
     };
   }
@@ -40,7 +40,7 @@ class Form extends Component {
     add(this.state, currentAsk);
     this.setState({
       id: id + 1,
-      ...INITIAL_LOCAL_STATE,
+      ...INITIAL_STATE,
     });
   }
 
