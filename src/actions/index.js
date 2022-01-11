@@ -24,7 +24,7 @@ export const addValue = (payload, ask) => ({
   ask,
 });
 
-export const xxx = () => (dispatch) => {
+export const getData = () => (dispatch) => {
   dispatch(fetchApi());
   return fetch('https://economia.awesomeapi.com.br/json/all')
     .then((response) => response.json())
