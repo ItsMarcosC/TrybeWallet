@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addValue, getData } from '../actions';
 
-const LOCAL_STATE = {
+const INITIAL_LOCAL_STATE = {
   value: '',
   description: '',
   currency: 'USD',
@@ -15,9 +15,13 @@ class Form extends Component {
   constructor() {
     super();
 
+    this.handleChange = this.handleChange.bind(this);
+    this.addValue = this.addValue.bind(this);
+    // Eu adoraria tirar isso e fazer um handleChange = () => {}, mas por alguma razão buga tudo, lembrar de procurar descobrir o pq depois...
+
     this.state = {
       id: 0,
-      ...LOCAL_STATE,
+      ...INITIAL_LOCAL_STATE,
       exchangeRates: {},
     };
   }
@@ -27,20 +31,20 @@ class Form extends Component {
     fetchCurrencies();
   }
 
-  addExpense = () => {
+  async addValue() {
     const { add, fetchCurrencies, currencies } = this.props;
     const { id, currency } = this.state;
     fetchCurrencies();
     const currentAsk = parseFloat(currencies[currency].ask);
-    this.setState({ exchangeRates: { ...currencies } });
+    await this.setState({ exchangeRates: { ...currencies } });
     add(this.state, currentAsk);
     this.setState({
       id: id + 1,
-      ...LOCAL_STATE,
+      ...INITIAL_LOCAL_STATE,
     });
   }
 
-  handleChange = ({ target }) => {
+  handleChange({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
@@ -58,7 +62,6 @@ class Form extends Component {
           value={ value }
           onChange={ this.handleChange }
         />
-
         <input
           type="text"
           placeholder="Descrição"
@@ -67,7 +70,6 @@ class Form extends Component {
           value={ description }
           onChange={ this.handleChange }
         />
-
         <label htmlFor="currency-input">
           Moeda:
           <select
@@ -103,7 +105,7 @@ class Form extends Component {
           <option value="Transporte">Transporte</option>
           <option value="Saúde">Saúde</option>
         </select>
-        <button type="button" onClick={ this.addExpense }>Adicionar despesa</button>
+        <button type="button" onClick={ this.addValue }>Adicionar despesa</button>
       </div>
     );
   }
