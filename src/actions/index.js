@@ -1,15 +1,10 @@
 export const SAVE_USER = 'SAVE_USER';
-export const FETCH_API = 'FETCH_API';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const ADD_VALUE = 'ADD_VALUE';
 
 export const setUser = (email) => ({
   type: SAVE_USER,
   email,
-});
-
-const fetchApi = () => ({
-  type: FETCH_API,
 });
 
 export const getCurrencies = (payload) => ({
@@ -24,9 +19,6 @@ export const addValue = (payload, ask) => ({
   ask,
 });
 
-export const getData = () => (dispatch) => {
-  dispatch(fetchApi());
-  return fetch('https://economia.awesomeapi.com.br/json/all')
-    .then((response) => response.json())
-    .then((payload) => dispatch(getCurrencies(payload)));
-};
+export const getData = () => (dispatch) => fetch('https://economia.awesomeapi.com.br/json/all')
+  .then((response) => response.json())
+  .then((payload) => dispatch(getCurrencies(payload)));
